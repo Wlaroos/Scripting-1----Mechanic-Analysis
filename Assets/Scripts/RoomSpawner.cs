@@ -25,7 +25,7 @@ public class RoomSpawner : MonoBehaviour
         controller = GameObject.FindGameObjectWithTag("Controller").GetComponent<FloorController>();
         if (controller._stopped == false)
         { 
-             Invoke("Spawn", 0.2f);
+             Invoke("Spawn", 1f);
         }
     }
 
@@ -83,30 +83,30 @@ public class RoomSpawner : MonoBehaviour
             if (_openingDir == 1)
             {
                 // Spawn a room UP
+                controller._currentRooms++;
                 Instantiate(templates._endRooms[0], transform.position, Quaternion.identity);
             }
             else if (_openingDir == 2)
             {
                 // Spawn a room DOWN
+                controller._currentRooms++;
                 Instantiate(templates._endRooms[1], transform.position, Quaternion.identity);
             }
             else if (_openingDir == 3)
             {
                 // Spawn a room to the LEFT
+                controller._currentRooms++;
                 Instantiate(templates._endRooms[2], transform.position, Quaternion.identity);
             }
             else if (_openingDir == 4)
             {
                 // Spawn a room to the RIGHT
+                controller._currentRooms++;
                 Instantiate(templates._endRooms[3], transform.position, Quaternion.identity);
             }
 
-
             Destroy(gameObject);
-
             spawned = true;
-
-            Debug.Log("CHANGED ROOM");
         }
     }
 
@@ -118,12 +118,17 @@ public class RoomSpawner : MonoBehaviour
         
         if (other.CompareTag("SpawnPoint"))
         {
-            if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
+            if (other.GetComponent<RoomSpawner>() != null)
             {
-                // Spawn walls blocking off any openings 
-                Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
-                //Destroy(gameObject);
+                if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
+                {
+                    // Spawn walls blocking off any openings 
+                    Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+                    controller._currentRooms++;
+                    //Destroy(gameObject);
+                }
             }
+
             spawned = true;
         }
 
