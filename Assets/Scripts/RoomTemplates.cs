@@ -9,5 +9,7 @@ public class RoomTemplates : MonoBehaviour
     [SerializeField] public GameObject[] _leftRooms_R;
     [SerializeField] public GameObject[] _rightRooms_L;
 
+    [SerializeField] public GameObject[] _endRooms;
+
     public GameObject closedRoom;
 }
