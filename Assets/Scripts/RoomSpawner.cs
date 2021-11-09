@@ -53,4 +53,18 @@ public class RoomSpawner : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("SpawnPoint"))
+        {
+            if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
+            {
+                // Spawn walls blocking off any openings
+                Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+            spawned = true;
+        }
+    }
+
 }
