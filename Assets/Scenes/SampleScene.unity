@@ -236,6 +236,7 @@ MonoBehaviour:
   _maxRooms: 10
   _currentRooms: 0
   _stopped: 0
+  _spawnSpeed: 1
 --- !u!4 &1394847472
 Transform:
   m_ObjectHideFlags: 0

@@ -12,25 +12,28 @@ public class RoomSpawner : MonoBehaviour
 
     private RoomTemplates templates;
     private FloorController controller;
+
     private int rand;
     private bool spawned = false;
 
-    private bool _ss;
+    private float _spawnSpeed;
+
+    private Checker _parentChecker;
 
     private Collider2D _test;
 
     private void Start()
     {
+
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
         controller = GameObject.FindGameObjectWithTag("Controller").GetComponent<FloorController>();
+        _parentChecker = transform.parent.Find("Checker").GetComponent<Checker>();
+        _spawnSpeed = controller._spawnSpeed;
+
         if (controller._stopped == false)
         { 
-             Invoke("Spawn", 1f);
+             Invoke("Spawn", _spawnSpeed);
         }
-    }
-
-    private void Update()
-    {
 
     }
 
@@ -80,32 +83,24 @@ public class RoomSpawner : MonoBehaviour
 
         if (_test == null && spawned == false)
         {
-            if (_openingDir == 1)
+            if (_parentChecker.FindOverlapping() == "Spawn Point (1)")
             {
-                // Spawn a room UP
-                controller._currentRooms++;
-                Instantiate(templates._endRooms[0], transform.position, Quaternion.identity);
+                Instantiate(templates._endRooms[0], transform.parent.position, Quaternion.identity);
             }
-            else if (_openingDir == 2)
+            else if (_parentChecker.FindOverlapping() == "Spawn Point (2)")
             {
-                // Spawn a room DOWN
-                controller._currentRooms++;
-                Instantiate(templates._endRooms[1], transform.position, Quaternion.identity);
+                Instantiate(templates._endRooms[1], transform.parent.position, Quaternion.identity);
             }
-            else if (_openingDir == 3)
+            else if (_parentChecker.FindOverlapping() == "Spawn Point (3)")
             {
-                // Spawn a room to the LEFT
-                controller._currentRooms++;
-                Instantiate(templates._endRooms[2], transform.position, Quaternion.identity);
+                Instantiate(templates._endRooms[2], transform.parent.position, Quaternion.identity);
             }
-            else if (_openingDir == 4)
+            else if (_parentChecker.FindOverlapping() == "Spawn Point (4)")
             {
-                // Spawn a room to the RIGHT
-                controller._currentRooms++;
-                Instantiate(templates._endRooms[3], transform.position, Quaternion.identity);
+                Instantiate(templates._endRooms[3], transform.parent.position, Quaternion.identity);
             }
 
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
             spawned = true;
         }
     }
