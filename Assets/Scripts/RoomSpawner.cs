@@ -14,19 +14,19 @@ public class RoomSpawner : MonoBehaviour
     {
         if(_openingDir == 1)
         {
-            // Spawn a room with a BOTTOM door.
+            // Spawn a room UP
         }
         else if(_openingDir == 2)
         {
-            // Spawn a room with a TOP door.
+            // Spawn a room DOWN
         }
         else if (_openingDir == 3)
         {
-            // Spawn a room with a LEFT door.
+            // Spawn a room to the LEFT
         }
         else if (_openingDir == 4)
         {
-            // Spawn a room with a RIGHT door.
+            // Spawn a room to the RIGHT
         }
     }
 
