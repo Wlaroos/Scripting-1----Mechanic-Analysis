@@ -14,4 +14,6 @@ public class RoomTemplates : MonoBehaviour
     [SerializeField] public GameObject[] _startRooms;
 
     public GameObject closedRoom;
+
+    public List<GameObject> rooms;
 }

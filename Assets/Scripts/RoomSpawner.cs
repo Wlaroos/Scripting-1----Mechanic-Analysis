@@ -16,6 +16,8 @@ public class RoomSpawner : MonoBehaviour
     private int rand;
     private bool spawned = false;
 
+    private bool _collision;
+
     private float _spawnSpeed;
 
     private Checker _parentChecker;
@@ -80,9 +82,11 @@ public class RoomSpawner : MonoBehaviour
 
     public void Test()
     {
-
+        /*
+     
         if (_test == null && spawned == false)
         {
+
             if (_parentChecker.FindOverlapping() == "Spawn Point (1)")
             {
                 Instantiate(templates._endRooms[0], transform.parent.position, Quaternion.identity);
@@ -103,14 +107,15 @@ public class RoomSpawner : MonoBehaviour
             Destroy(transform.parent.gameObject);
             spawned = true;
         }
+
+        */
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         _test = other;
 
-        
-        
+        /*
         if (other.CompareTag("SpawnPoint"))
         {
             if (other.GetComponent<RoomSpawner>() != null)
@@ -126,8 +131,24 @@ public class RoomSpawner : MonoBehaviour
 
             spawned = true;
         }
+        */
+    }
 
-        
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision != null)
+        {
+            _collision = true;
+        }
+        else if (collision == null)
+        {
+            _collision = false;
+        }
+    }
+
+    public bool isColliding()
+    {
+        return _collision;
     }
 
 }

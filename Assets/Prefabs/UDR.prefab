@@ -288,6 +288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8634620903619031757}
   - component: {fileID: 8634620903619031756}
+  - component: {fileID: -4746542617602103700}
   m_Layer: 0
   m_Name: UDR
   m_TagString: Untagged
@@ -363,6 +364,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-4746542617602103700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8634620903619031759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa42cc2e30c4994b9665ffd25c98362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8634620904537165557
 GameObject:
   m_ObjectHideFlags: 0

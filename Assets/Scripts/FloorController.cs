@@ -39,8 +39,14 @@ public class FloorController : MonoBehaviour
 
         foreach (RoomSpawner item in myItems)
         {
+            if(item.isColliding() == false)
+            {
+                Destroy(item.gameObject);
+            }
+
             item.Test();
         }
+
     }
 
 }
