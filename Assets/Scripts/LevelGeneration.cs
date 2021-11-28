@@ -115,7 +115,6 @@ public class LevelGeneration : MonoBehaviour
         return checkingPos;
     }
 
-    // Same as NewPosision(); but only for having 1 neighbor
     Vector2 SelectiveNewPosition()
     {
         int index = 0;
@@ -245,6 +244,8 @@ public class LevelGeneration : MonoBehaviour
 
     private void DrawMap()
     {
+        int endRooms = 0;
+
         foreach (Room room in rooms)
         {
             if (room == null)
@@ -260,6 +261,37 @@ public class LevelGeneration : MonoBehaviour
             mapper.down = room.doorBot;
             mapper.left = room.doorLeft;
             mapper.right = room.doorRight;
+            if (((mapper.up ? 1 : 0) + (mapper.down ? 1 : 0) + (mapper.left ? 1 : 0) + (mapper.right ? 1 : 0) == 1))
+            {
+                endRooms++;
+            }
         }
+
+        Debug.Log("ENDROOMS: " + endRooms);
+
+        if (endRooms < 4)
+        {
+            Debug.Log("NOT ENOUGH");
+            TestMap();
+            CreateRooms();
+            SetRoomDoors();
+            DrawMap();
+        }
+    }
+
+    private void TestMap()
+    {
+        foreach (MapSpriteSelector o in Object.FindObjectsOfType<MapSpriteSelector>())
+        {
+            Destroy(o.gameObject);
+        }
+        takenPositions.Clear();
+
+        Debug.Log("Destroyed");
+    }
+
+    private void AddSpecial()
+    {
+
     }
 }
