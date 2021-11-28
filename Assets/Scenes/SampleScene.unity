@@ -233,8 +233,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7854f24d30142bd498753e3d2f247f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldSize: {x: 4, y: 4}
+  worldSize: {x: 8, y: 8}
   numberOfRooms: 10
+  endRoomMin: 3
+  endRoomMax: 4
   roomWhiteObj: {fileID: 1415124366655905945, guid: 58f22b38a0c1997408f4c4f61a84b9db,
     type: 3}
 --- !u!4 &853589192

@@ -15,6 +15,9 @@ public class LevelGeneration : MonoBehaviour
     int gridSizeY;
     [SerializeField] int numberOfRooms = 20;
 
+    [SerializeField] int endRoomMin;
+    [SerializeField] int endRoomMax;
+
     public GameObject roomWhiteObj;
 
     private void Start()
@@ -28,6 +31,7 @@ public class LevelGeneration : MonoBehaviour
         CreateRooms();
         SetRoomDoors();
         DrawMap();
+        AddSpecial();
     }
 
     private void CreateRooms()
@@ -263,19 +267,23 @@ public class LevelGeneration : MonoBehaviour
             mapper.right = room.doorRight;
             if (((mapper.up ? 1 : 0) + (mapper.down ? 1 : 0) + (mapper.left ? 1 : 0) + (mapper.right ? 1 : 0) == 1))
             {
-                endRooms++;
+                if (mapper.type != 1)
+                {
+                    endRooms++;
+                }
             }
         }
 
         Debug.Log("ENDROOMS: " + endRooms);
 
-        if (endRooms < 4)
+        if (endRooms < endRoomMin || endRooms > endRoomMax)
         {
-            Debug.Log("NOT ENOUGH");
+            Debug.Log("Wrong number of endrooms, retrying....");
             TestMap();
             CreateRooms();
             SetRoomDoors();
             DrawMap();
+            AddSpecial();
         }
     }
 
@@ -286,12 +294,19 @@ public class LevelGeneration : MonoBehaviour
             Destroy(o.gameObject);
         }
         takenPositions.Clear();
-
-        Debug.Log("Destroyed");
     }
 
     private void AddSpecial()
     {
-
+        foreach (MapSpriteSelector o in Object.FindObjectsOfType<MapSpriteSelector>())
+        {
+            if (((o.up ? 1 : 0) + (o.down ? 1 : 0) + (o.left ? 1 : 0) + (o.right ? 1 : 0) == 1))
+            {
+                if (o.type != 1)
+                {
+                    o.type = 2;
+                }
+            }
+        }
     }
 }
