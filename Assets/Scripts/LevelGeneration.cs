@@ -18,7 +18,19 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField] int endRoomMin;
     [SerializeField] int endRoomMax;
 
+    MapSpriteSelector startRoom;
+    MapSpriteSelector bossRoom;
+    MapSpriteSelector swapRoom;
+
     public GameObject roomWhiteObj;
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            AddSpecial();   
+        }
+    }
 
     private void Start()
     {
@@ -31,7 +43,6 @@ public class LevelGeneration : MonoBehaviour
         CreateRooms();
         SetRoomDoors();
         DrawMap();
-        AddSpecial();
     }
 
     private void CreateRooms()
@@ -48,7 +59,7 @@ public class LevelGeneration : MonoBehaviour
         float randomCompareEnd = 0.01f;
 
         //Add Rooms
-        for (int i = 0; i < numberOfRooms; i++)
+        for (int i = 0; i < numberOfRooms - 1; i++)
         {
             float randomPerc = ((float)i) / (((float)numberOfRooms - 1));
             randomCompare = Mathf.Lerp(randomCompareStart, randomCompareEnd, randomPerc);
@@ -128,6 +139,7 @@ public class LevelGeneration : MonoBehaviour
         Vector2 checkingPos = Vector2.zero;
         do
         {
+            inc = 0;
             do
             {
                 index = Mathf.RoundToInt(Random.value * (takenPositions.Count - 1));
@@ -165,6 +177,10 @@ public class LevelGeneration : MonoBehaviour
             checkingPos = new Vector2(x, y);
         }
         while (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y > gridSizeY || y < -gridSizeY);
+        if (inc >= 100)
+        {
+            Debug.Log("Error: could not find position with only one neighbor");
+        }
         return checkingPos;
     }
 
@@ -194,7 +210,7 @@ public class LevelGeneration : MonoBehaviour
     {
         for (int x = 0; x < ((gridSizeX * 2)); x++)
         {
-            for (int y = 0; y < ((gridSizeX * 2)); y++)
+            for (int y = 0; y < ((gridSizeY * 2)); y++)
             {
                 if (rooms[x,y] == null)
                 {
@@ -265,6 +281,7 @@ public class LevelGeneration : MonoBehaviour
             mapper.down = room.doorBot;
             mapper.left = room.doorLeft;
             mapper.right = room.doorRight;
+            mapper.loc = drawPos;
             if (((mapper.up ? 1 : 0) + (mapper.down ? 1 : 0) + (mapper.left ? 1 : 0) + (mapper.right ? 1 : 0) == 1))
             {
                 if (mapper.type != 1)
@@ -278,12 +295,11 @@ public class LevelGeneration : MonoBehaviour
 
         if (endRooms < endRoomMin || endRooms > endRoomMax)
         {
-            Debug.Log("Wrong number of endrooms, retrying....");
-            TestMap();
-            CreateRooms();
-            SetRoomDoors();
-            DrawMap();
-            AddSpecial();
+            Reset();
+        }
+        else
+        {
+            //AddSpecial();
         }
     }
 
@@ -294,19 +310,82 @@ public class LevelGeneration : MonoBehaviour
             Destroy(o.gameObject);
         }
         takenPositions.Clear();
+        startRoom = null;
+        bossRoom = null;
+        rooms = null;
     }
 
     private void AddSpecial()
     {
+        float dist = 0;
+        int count = 0;
+
+        foreach (MapSpriteSelector o in Object.FindObjectsOfType<MapSpriteSelector>())
+        {
+            if (o.type == 1)
+            {
+                startRoom = o;
+            }
+        }
+
         foreach (MapSpriteSelector o in Object.FindObjectsOfType<MapSpriteSelector>())
         {
             if (((o.up ? 1 : 0) + (o.down ? 1 : 0) + (o.left ? 1 : 0) + (o.right ? 1 : 0) == 1))
             {
                 if (o.type != 1)
                 {
-                    o.type = 2;
+                    if (Vector2.Distance(startRoom.loc, o.loc) >= dist)
+                    {
+                        dist = Vector2.Distance(startRoom.loc, o.loc);
+                        bossRoom = o;
+                    }
+                    o.type = 99;
                 }
             }
         }
+
+        bossRoom.type = 4;
+
+        foreach (MapSpriteSelector o in Object.FindObjectsOfType<MapSpriteSelector>())
+        {
+            if (((o.up ? 1 : 0) + (o.down ? 1 : 0) + (o.left ? 1 : 0) + (o.right ? 1 : 0) == 1))
+            {
+                if (o.type != 1 && o.type != 4)
+                {
+                    if (o.type == 99 && count == 0)
+                    {
+                        o.type = 3;
+                        count++;
+                    }
+                    else if (o.type == 99 && count == 1)
+                    {
+                        o.type = 2;
+                        count++;
+                    }
+                    else if (o.type == 99)
+                    {
+                        o.type = 0;
+                        bossRoom.type = 4;
+                    }
+                }
+            }
+        }
+
+        foreach (MapSpriteSelector o in Object.FindObjectsOfType<MapSpriteSelector>())
+        {
+            o.PickColor();
+        }
+
+
+
+    }
+
+    private void Reset()
+    {
+        Debug.Log("Wrong number of endrooms, retrying....");
+        TestMap();
+        CreateRooms();
+        SetRoomDoors();
+        DrawMap();
     }
 }

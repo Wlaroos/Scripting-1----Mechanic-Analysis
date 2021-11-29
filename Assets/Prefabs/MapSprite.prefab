@@ -114,8 +114,10 @@ MonoBehaviour:
   left: 0
   right: 0
   type: 0
+  loc: {x: 0, y: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   startColor: {r: 0.12918305, g: 1, b: 0, a: 1}
   bossColor: {r: 1, g: 0, b: 0, a: 1}
   lootColor: {r: 0.96575654, g: 1, b: 0, a: 1}
   shopColor: {r: 1, g: 0.6207221, b: 0, a: 1}
+  genericEnd: {r: 0, g: 0, b: 0, a: 1}

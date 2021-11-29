@@ -12,7 +12,9 @@ public class MapSpriteSelector : MonoBehaviour
 
     public int type;
 
-    public Color normalColor, startColor, bossColor, lootColor, shopColor;
+    public Vector2 loc;
+
+    public Color normalColor, startColor, bossColor, lootColor, shopColor, genericEnd;
 
     Color mainColor;
 
@@ -118,7 +120,7 @@ public class MapSpriteSelector : MonoBehaviour
         }
     }
 
-    void PickColor()
+    public void PickColor()
     {
         if (type == 0)
         {
@@ -139,6 +141,10 @@ public class MapSpriteSelector : MonoBehaviour
         else if (type == 4)
         {
             mainColor = bossColor;
+        }
+        else if (type == 99)
+        {
+            mainColor = genericEnd;
         }
         rend.color = mainColor;
     }
