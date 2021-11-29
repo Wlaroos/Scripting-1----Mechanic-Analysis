@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ref: {fileID: 1045991228}
+  _quadRef: {fileID: 241411368}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
