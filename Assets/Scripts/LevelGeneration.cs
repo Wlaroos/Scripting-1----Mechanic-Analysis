@@ -20,17 +20,10 @@ public class LevelGeneration : MonoBehaviour
 
     MapSpriteSelector startRoom;
     MapSpriteSelector bossRoom;
-    MapSpriteSelector swapRoom;
+
+    MapSpriteSelector[] Micto;
 
     public GameObject roomWhiteObj;
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            AddSpecial();   
-        }
-    }
 
     private void Start()
     {
@@ -43,6 +36,7 @@ public class LevelGeneration : MonoBehaviour
         CreateRooms();
         SetRoomDoors();
         DrawMap();
+        //DelayHelper.DelayAction(this, AddSpecial, .01f);
     }
 
     private void CreateRooms()
@@ -299,7 +293,7 @@ public class LevelGeneration : MonoBehaviour
         }
         else
         {
-            //AddSpecial();
+            DelayHelper.DelayAction(this, AddSpecial, .01f);
         }
     }
 
@@ -375,9 +369,21 @@ public class LevelGeneration : MonoBehaviour
         {
             o.PickColor();
         }
+        int i = Object.FindObjectsOfType<MapSpriteSelector>().Length - 1;
+        foreach (Room room in rooms)
+        {
+            if (room == null)
+            {
+                continue;
+            }
+            MapSpriteSelector mapper = Object.FindObjectsOfType<MapSpriteSelector>()[i];
+            //Debug.Log(room.gridPos + " + " + mapper.loc);
+            room.type = mapper.type;
+            i--;
+        }
 
-
-
+        DelayHelper.DelayAction(this, BigTest, .01f);
+       
     }
 
     private void Reset()
@@ -387,5 +393,11 @@ public class LevelGeneration : MonoBehaviour
         CreateRooms();
         SetRoomDoors();
         DrawMap();
+        //DelayHelper.DelayAction(this, AddSpecial, .01f); 
+    }
+
+    void BigTest()
+    {
+        GetComponent<SheetAssigner>().Assign(rooms);
     }
 }
