@@ -142,15 +142,28 @@ public class MapSpriteSelector : MonoBehaviour
         else if (type == 4)
         {
             mainColor = bossColor;
+            NoSecrets();
         }
         else if (type == 5)
         {
             mainColor = secretColor;
+            NoSecrets();
         }
         else if (type == 99)
         {
             mainColor = genericEnd;
         }
         rend.color = mainColor;
+    }
+
+    void NoSecrets()
+    {
+        if (transform.childCount != 1)
+        {
+            Destroy(transform.GetChild(1).gameObject);
+            Destroy(transform.GetChild(2).gameObject);
+            Destroy(transform.GetChild(3).gameObject);
+            Destroy(transform.GetChild(4).gameObject);
+        }
     }
 }

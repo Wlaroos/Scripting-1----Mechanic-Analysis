@@ -556,8 +556,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldSize: {x: 8, y: 8}
   numberOfRooms: 10
-  endRoomMin: 3
-  endRoomMax: 4
+  endRoomMin: 4
+  endRoomMax: 5
   roomWhiteObj: {fileID: 1975706786332780, guid: a1fe431a2bc4a2940b2503b8f131da18,
     type: 3}
 --- !u!4 &853589192
@@ -601,6 +601,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 87e74a0b235e45e42a3c47f2489a4ad6, type: 3}
   sheetsStart:
   - {fileID: 2800000, guid: 807c91f4bc4c1224299f4fdf2b46769e, type: 3}
+  sheetsSecret:
+  - {fileID: 2800000, guid: b9f70dd64132fde42a90cf7a2e8eece2, type: 3}
   RoomObj: {fileID: 1038065722679700, guid: 092b915af527d594aa11083a065a8de8, type: 3}
   roomDimensions: {x: 272, y: 144}
   gutterSize: {x: 144, y: 64}
