@@ -11,7 +11,7 @@ public class MapFog : MonoBehaviour
     private void Start()
     {
         _ref = GameObject.Find("Map Icon");
-        DelayHelper.DelayAction(this, DelayedColor, .02f);
+        DelayHelper.DelayAction(this, DelayedColor, .01f);
     }
 
     private void OnTriggerStay(Collider other)
@@ -21,7 +21,7 @@ public class MapFog : MonoBehaviour
             Full();
             ful = true;
         }
-        else if (ful == false)
+        else if (ful == false && other.gameObject.name == "Collider")
         {
             Black();
         }
@@ -35,16 +35,16 @@ public class MapFog : MonoBehaviour
 
     void Black()
     {
-        GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1);
-        if (GetComponent<MapSpriteSelector>().type == 5)
+        if (GetComponent<MapSpriteSelector>().type != 5)
         {
-            transform.GetChild(0).gameObject.SetActive(true);
+            GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1);
         }
     }
 
     void Full()
     {
         GetComponent<SpriteRenderer>().color = new Color(def.r, def.g, def.b, 1);
+
         if (GetComponent<MapSpriteSelector>().type == 5)
         {
             transform.GetChild(0).gameObject.SetActive(true);

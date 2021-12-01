@@ -27,6 +27,8 @@ public class LevelGeneration : MonoBehaviour
 
     int secretCount = 0;
 
+    bool bad = false;
+
     private void Start()
     {
         if(numberOfRooms >= (worldSize.x * 2) * (worldSize.y * 2))
@@ -287,7 +289,7 @@ public class LevelGeneration : MonoBehaviour
             }
         }
 
-        Debug.Log("ENDROOMS: " + endRooms);
+        //Debug.Log("ENDROOMS: " + endRooms);
 
         if (endRooms < endRoomMin || endRooms > endRoomMax)
         {
@@ -309,6 +311,8 @@ public class LevelGeneration : MonoBehaviour
         startRoom = null;
         bossRoom = null;
         rooms = null;
+        bad = false;
+        secretCount = 0;
     }
 
     private void AddSpecial()
@@ -372,7 +376,7 @@ public class LevelGeneration : MonoBehaviour
             }
         }
 
-            foreach (MapSpriteSelector o in Object.FindObjectsOfType<MapSpriteSelector>())
+        foreach (MapSpriteSelector o in Object.FindObjectsOfType<MapSpriteSelector>())
         {
             o.PickColor();
         }
@@ -389,13 +393,13 @@ public class LevelGeneration : MonoBehaviour
             room.type = mapper.type;
             i--;
         }
-        DelayHelper.DelayAction(this, BigTest, .01f);
+
+        DelayHelper.DelayAction(this, BigTest, .05f);
        
     }
 
     private void Reset()
     {
-        Debug.Log("Wrong number of endrooms, retrying....");
         TestMap();
         CreateRooms();
         SetRoomDoors();
@@ -422,49 +426,79 @@ public class LevelGeneration : MonoBehaviour
             {
                 for (int z = 0; z < secretPositions.Count - 1; z++)
                 {
-                    if (secretPositions[x] == secretPositions[y] && secretPositions[x] == secretPositions[z] && ((x != y) && (x != z) && (y != z)) && !takenPositions.Contains(secretPositions[x] / 10))
+                    if (secretCount == 0)
                     {
-                        secretCount++;
-                        takenPositions.Insert(0, secretPositions[x]);
-                        rooms[(int)(secretPositions[x].x / 10) + 8, (int)(secretPositions[x].y / 10) + 8] = new Room(secretPositions[x], 5);
-                        MapSpriteSelector mapper = Object.Instantiate(roomWhiteObj, secretPositions[x], Quaternion.identity).GetComponent<MapSpriteSelector>();
-                        rooms[(int)(secretPositions[x].x / 10) + 8, (int)(secretPositions[x].y / 10) + 8].type = 5;
-                        rooms[(int)(secretPositions[x].x / 10) + 8, (int)(secretPositions[x].y / 10) + 8].gridPos = rooms[(int)(secretPositions[x].x / 10) + 8, (int)(secretPositions[x].y / 10) + 8].gridPos / 10;
-                        mapper.type = 5;
-                        if(takenPositions.Contains(mapper.transform.GetChild(1).position / 10))
+                        if (secretPositions[x] == secretPositions[y] && secretPositions[x] == secretPositions[z] && ((x != y) && (x != z) && (y != z)) && !takenPositions.Contains(secretPositions[x] / 10))
                         {
-                            rooms[(int)(secretPositions[x].x / 10) + 8, (int)(secretPositions[x].y / 10) + 8].doorTop = true;
-                            mapper.up = true;
-                        }
-                        if (takenPositions.Contains(mapper.transform.GetChild(2).position / 10))
-                        {
-                            rooms[(int)(secretPositions[x].x / 10) + 8, (int)(secretPositions[x].y / 10) + 8].doorBot = true;
-                            mapper.down = true;
-                        }
-                        if (takenPositions.Contains(mapper.transform.GetChild(3).position / 10))
-                        {
-                            rooms[(int)(secretPositions[x].x / 10) + 8, (int)(secretPositions[x].y / 10) + 8].doorLeft = true;
-                            mapper.left = true;
-                        }
-                        if (takenPositions.Contains(mapper.transform.GetChild(4).position / 10))
-                        {
-                            rooms[(int)(secretPositions[x].x / 10) + 8, (int)(secretPositions[x].y / 10) + 8].doorRight = true;
-                            mapper.right = true;
-                        }
-                        mapper.loc = secretPositions[x];
+                            takenPositions.Insert(0, secretPositions[x]);
 
-                        if (secretCount < 1)
-                        {
-                            Reset();
+                            int secretX = ((int)(secretPositions[x].x / 10) + 8);
+                            int secretY = ((int)(secretPositions[x].y / 10) + 8);
+
+                            rooms[secretX, secretY] = new Room(secretPositions[x], 5);
+                            MapSpriteSelector mapper = Object.Instantiate(roomWhiteObj, secretPositions[x], Quaternion.identity).GetComponent<MapSpriteSelector>();
+                            rooms[secretX, secretY].type = 5;
+                            rooms[secretX, secretY].gridPos = rooms[secretX, secretY].gridPos / 10;
+                            mapper.type = 5;
+                            if (takenPositions.Contains(mapper.transform.GetChild(1).position / 10))
+                            {
+                                rooms[secretX, secretY].doorTop = true;
+                                mapper.up = true;
+                            }
+                            if (takenPositions.Contains(mapper.transform.GetChild(2).position / 10))
+                            {
+                                rooms[secretX, secretY].doorBot = true;
+                                mapper.down = true;
+                            }
+                            if (takenPositions.Contains(mapper.transform.GetChild(3).position / 10))
+                            {
+                                rooms[secretX, secretY].doorLeft = true;
+                                mapper.left = true;
+                            }
+                            if (takenPositions.Contains(mapper.transform.GetChild(4).position / 10))
+                            {
+                                rooms[secretX, secretY].doorRight = true;
+                                mapper.right = true;
+                            }
+                            mapper.loc = secretPositions[x];
+                            secretCount++;
+
+                            for (int i = 1; i < 5; i++)
+                            {
+                                if (mapper.transform.childCount != 1)
+                                {
+
+                                    int mapperX = ((int)(mapper.transform.GetChild(i).position.x / 10) + 8);
+                                    int mapperY = ((int)(mapper.transform.GetChild(i).position.y / 10) + 8);
+
+                                    if (takenPositions.Contains(mapper.transform.GetChild(i).position / 10) && (rooms[mapperX, mapperY].type == 5))
+                                    {
+                                        bad = true;
+                                        Debug.Log("SECRET NEXT TO SECRET");
+                                    }
+
+                                }
+                            }   
+
                         }
-                        else
-                        {
-                            GetComponent<SheetAssigner>().Assign(rooms);
-                        }
-                        return;
                     }
                 }
             }
         }
+
+
+        if (secretCount < 1)
+        {
+            Reset();
+        }
+        else if (bad == true)
+        {
+            Reset();
+        }
+        else
+        {
+            GetComponent<SheetAssigner>().Assign(rooms);
+        }
+
     }
 }

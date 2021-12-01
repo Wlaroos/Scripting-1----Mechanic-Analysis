@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 33084847}
   - component: {fileID: 33084846}
   m_Layer: 8
-  m_Name: Collider (3)
+  m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -789,7 +789,7 @@ GameObject:
   - component: {fileID: 1196203261}
   - component: {fileID: 1196203260}
   m_Layer: 8
-  m_Name: Collider (2)
+  m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -936,7 +936,7 @@ GameObject:
   - component: {fileID: 1314220596}
   - component: {fileID: 1314220597}
   m_Layer: 8
-  m_Name: Collider (1)
+  m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
