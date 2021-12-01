@@ -356,6 +356,11 @@ public class LevelGeneration : MonoBehaviour
                         o.type = 2;
                         count++;
                     }
+                    else if (o.type == 99 && count == 2)
+                    {
+                        o.type = 5;
+                        count++;
+                    }
                     else if (o.type == 99)
                     {
                         o.type = 0;

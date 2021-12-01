@@ -36,10 +36,18 @@ public class MapFog : MonoBehaviour
     void Black()
     {
         GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1);
+        if (GetComponent<MapSpriteSelector>().type == 5)
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
     }
 
     void Full()
     {
         GetComponent<SpriteRenderer>().color = new Color(def.r, def.g, def.b, 1);
+        if (GetComponent<MapSpriteSelector>().type == 5)
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
     }
 }

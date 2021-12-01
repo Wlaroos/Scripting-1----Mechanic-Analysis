@@ -14,7 +14,7 @@ public class MapSpriteSelector : MonoBehaviour
 
     public Vector2 loc;
 
-    public Color normalColor, startColor, bossColor, lootColor, shopColor, genericEnd;
+    public Color normalColor, startColor, bossColor, lootColor, shopColor, secretColor, genericEnd;
 
     Color mainColor;
 
@@ -24,6 +24,7 @@ public class MapSpriteSelector : MonoBehaviour
     {
         rend = GetComponent<SpriteRenderer>();
         mainColor = normalColor;
+        transform.GetChild(0).gameObject.SetActive(false);
         PickSprite();
         PickColor();
     }
@@ -141,6 +142,10 @@ public class MapSpriteSelector : MonoBehaviour
         else if (type == 4)
         {
             mainColor = bossColor;
+        }
+        else if (type == 5)
+        {
+            mainColor = secretColor;
         }
         else if (type == 99)
         {
