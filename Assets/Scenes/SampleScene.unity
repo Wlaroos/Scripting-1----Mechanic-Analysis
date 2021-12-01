@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 328993270}
   - component: {fileID: 328993269}
   m_Layer: 0
-  m_Name: The binding of Isaac OST - Basement theme
+  m_Name: Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -423,7 +423,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -572,7 +572,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &853589193
 MonoBehaviour:
@@ -1025,12 +1025,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394847470}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.619957, y: -16.357271, z: 47.441242}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 2055169584}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1633604772
 GameObject:
@@ -1152,12 +1152,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1633604772}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50.08502, y: -21.727684, z: -4.1953125}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -55.704975, y: -38.084953, z: 43.24593}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 2055169584}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1897133403
 GameObject:
@@ -1263,27 +1263,60 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
+--- !u!1 &2055169583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2055169584}
+  m_Layer: 0
+  m_Name: OLD STUFF
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2055169584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055169583}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.619957, y: 16.357271, z: -47.441242}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1633604774}
+  - {fileID: 1394847472}
+  - {fileID: 1702687573062021692}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1702687573062021691
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 2055169584}
     m_Modifications:
     - target: {fileID: 1702687574755715701, guid: 788fa92e6f057804888ab0df0676d1ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5.619957
       objectReference: {fileID: 0}
     - target: {fileID: 1702687574755715701, guid: 788fa92e6f057804888ab0df0676d1ab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -16.357271
       objectReference: {fileID: 0}
     - target: {fileID: 1702687574755715701, guid: 788fa92e6f057804888ab0df0676d1ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 47.441242
       objectReference: {fileID: 0}
     - target: {fileID: 1702687574755715701, guid: 788fa92e6f057804888ab0df0676d1ab,
         type: 3}
@@ -1308,7 +1341,7 @@ PrefabInstance:
     - target: {fileID: 1702687574755715701, guid: 788fa92e6f057804888ab0df0676d1ab,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1702687574755715701, guid: 788fa92e6f057804888ab0df0676d1ab,
         type: 3}
@@ -1337,3 +1370,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 788fa92e6f057804888ab0df0676d1ab, type: 3}
+--- !u!4 &1702687573062021692 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1702687574755715701, guid: 788fa92e6f057804888ab0df0676d1ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 1702687573062021691}
+  m_PrefabAsset: {fileID: 0}

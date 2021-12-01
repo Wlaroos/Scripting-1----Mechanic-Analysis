@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Utility : MonoBehaviour
+public class ReloadScene : MonoBehaviour
 {
 	void Update()
 	{

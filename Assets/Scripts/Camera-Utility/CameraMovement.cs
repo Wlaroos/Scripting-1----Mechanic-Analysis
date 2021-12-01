@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialMovement : MonoBehaviour
+public class CameraMovement : MonoBehaviour
 {
 	Vector3 moveJump = Vector2.zero;
 	float horMove, vertMove;
@@ -10,17 +10,20 @@ public class TutorialMovement : MonoBehaviour
 	{
 		SheetAssigner SA = FindObjectOfType<SheetAssigner>();
 		Vector2 tempJump = SA.roomDimensions + SA.gutterSize;
-		moveJump = new Vector3(tempJump.x, tempJump.y, 0); //distance b/w rooms: to be used for movement
+
+		//Distance between rooms is used for amount of movement
+		moveJump = new Vector3(tempJump.x, tempJump.y, 0); 
 	}
 	void Update()
 	{
-		if (Input.GetKeyDown("w") || Input.GetKeyDown("s") ||
-			Input.GetKeyDown("a") || Input.GetKeyDown("d")) //if any 'wasd' key is pressed
+		if (Input.GetKeyDown("w") || Input.GetKeyDown("s") || Input.GetKeyDown("a") || Input.GetKeyDown("d")) 
 		{
-			horMove = System.Math.Sign(Input.GetAxisRaw("Horizontal"));//capture input
+			//Capture input
+			horMove = System.Math.Sign(Input.GetAxisRaw("Horizontal"));
 			vertMove = System.Math.Sign(Input.GetAxisRaw("Vertical"));
 			Vector3 tempPos = transform.position;
-			tempPos += Vector3.right * horMove * moveJump.x; //jump bnetween rooms based on input
+			//Teleport based on input
+			tempPos += Vector3.right * horMove * moveJump.x;
 			tempPos += Vector3.up * vertMove * moveJump.y;
 
 			transform.position = tempPos;
