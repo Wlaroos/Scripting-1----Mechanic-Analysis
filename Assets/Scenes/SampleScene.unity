@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 241411370}
   - component: {fileID: 241411369}
   m_Layer: 0
-  m_Name: Quad
+  m_Name: MiniMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

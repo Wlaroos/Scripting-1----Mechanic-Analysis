@@ -264,22 +264,32 @@ public class LevelGeneration : MonoBehaviour
     {
         int endRooms = 0;
 
+        //Every location in the world grid
         foreach (Room room in rooms)
         {
+            //Test if there is a room on this point of the grid
             if (room == null)
             {
                 continue;
             }
+
+            //Assign location values
             Vector2 drawPos = room.gridPos;
             drawPos.x *= 10;
             drawPos.y *= 10;
+
+            //Create minimap section 
             MapSpriteSelector mapper = Object.Instantiate(roomWhiteObj, drawPos, Quaternion.identity).GetComponent<MapSpriteSelector>();
+
+            //Assign type and adjacent rooms (for doors) to the minimap room from the data in the list
             mapper.type = room.type;
             mapper.up = room.doorTop;
             mapper.down = room.doorBot;
             mapper.left = room.doorLeft;
             mapper.right = room.doorRight;
             mapper.loc = drawPos;
+
+            //Tests the door booleans and checks if there is only one door
             if (((mapper.up ? 1 : 0) + (mapper.down ? 1 : 0) + (mapper.left ? 1 : 0) + (mapper.right ? 1 : 0) == 1))
             {
                 if (mapper.type != 1)
@@ -291,10 +301,12 @@ public class LevelGeneration : MonoBehaviour
 
         //Debug.Log("ENDROOMS: " + endRooms);
 
+        //If not enough end rooms were generated, restart the generation script
         if (endRooms < endRoomMin || endRooms > endRoomMax)
         {
             Reset();
         }
+        //Moves on to adding in the special room types
         else
         {
             DelayHelper.DelayAction(this, AddSpecial, .01f);
